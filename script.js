@@ -13,6 +13,16 @@ const categoryDetails = {
     }
 };
 
+let selectedSort = 'Alphabetical (A-Z)'; // default 
+const sortSelect = document.getElementById('sortSelect');
+
+sortSelect.addEventListener("change", (e) => {
+    selectedSort = e.target.value;
+    main.innerHTML = "";      
+    shownProducts = 0;        // reset shown products
+    renderProducts();          
+});
+
 const navLinks = document.querySelectorAll('.category-menu a');
 const main= document.getElementById('main');
 
@@ -34,7 +44,8 @@ function updateCategoryInfo() {
 
 function renderProducts() {
     // filter products per current category
-    const filtered = products.filter(p => p.category === currCategory);
+    let filtered = products.filter(p => p.category === currCategory);
+    filtered = sortProd(filtered, selectedSort); // sort by selected dropdown option
     const next_products = filtered.slice(shownProducts, shownProducts + page_size); // select next batch to show
 
     const counter = document.getElementById('productCount');

@@ -14,17 +14,45 @@ body {
     margin: 30px 0;
 }
 
+.sort-container{
+    display: flex;
+    justify-content: flex-end;
+    width: 85%;
+    margin-bottom: 20px;
+}
+
+.nav-logo-img {
+    height: 40px;
+    width: auto;
+}
 
 .header {
+    min-height: 50px;
     display: flex;
     align-items: center;
     position: sticky;
     top: 0;
-    gap: 30px;
     padding: 10px 12px;
     background: #3d7a7c;
     color: #f1f1f1;
     z-index: 100;
+}
+
+.header h2 {
+    margin: 0;
+    padding-left: 64px; 
+}
+
+.navbar {
+  position: static;
+  margin-left: auto;
+}
+
+.nav-logo {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .footer {
@@ -42,11 +70,15 @@ body {
 }
 
 .category-menu {
+    position: absolute;
     list-style: none;
     display: flex;
+    left: 20%;
+    top:35%;
+    margin: 0;
     gap: 20px;
     padding: 0;
-    margin-left: 20px;
+  
 
 }
 

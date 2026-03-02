@@ -4,17 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLP Page</title>
+    <title>TechWorld</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/assets/icon.png">
 </head>
 
 
 <body>
     <div class="header" id="topHeader">
-        <h2>PLP Project</h2>
+        <h2>TechWorld </h2>
 
 
-        <nav>
+        <nav class="navbar">
+            <a href="#" class="nav-logo"><img src="assets/logo.png" alt="TechWorld Logo" class="nav-logo-img">
+            </a>
             <ul class="category-menu">
                 <li><a href="#" data-category=laptops>Laptops</a></li>
                 <li><a href="#" data-category=keyboards>Keyboards</a></li>
@@ -23,25 +26,35 @@
         </nav>
     </div>
 
-  <div class="container">
-    <div class="category-info">
-        <h1 id="categoryTitle"></h1>
-        <p id="categoryDesc"></p>
-    </div>
+    <div class="container">
+        <div class="category-info">
+            <h1 id="categoryTitle"></h1>
+            <p id="categoryDesc"></p>
+        </div>
 
-    <div class="products-layout">
-        <main id="main"></main>
-        <div id="productCount" class="product-count"></div>
-    </div>
+        <div class="sort-container">
+            <label for="sortSelect">Sort by:</label>
+            <select id="sortSelect">
+                <option value="Alphabetical (A-Z)">Alphabetical (A–Z)</option>
+                <option value="Alphabetical (Z-A)">Alphabetical (Z–A)</option>
+                <option value="Price (Low to High)">Price (Low to High)</option>
+                <option value="Price (High to Low)">Price (High to Low)</option>
+            </select>
+        </div>
 
-    <button id="loadMore" class="load-more-btn">Load More</button>
-</div>
+        <div class="products-layout">
+            <main id="main"></main>
+            <div id="productCount" class="product-count"></div>
+        </div>
+
+        <button id="loadMore" class="load-more-btn">Load More</button>
+    </div>
 
 
 
 
     <footer class="footer">
-        <p>Copyright &copy; 2026 PLP Project. All rights reserved.</p>
+        <p>Copyright &copy; 2026 TechWorld. All rights reserved.</p>
         <ul class="footer-links">
             <li><a href="#">Terms & Conditions</a></li>
             <li><a href="#">Privacy Policy</a></li>
@@ -49,6 +62,7 @@
         </ul>
     </footer>
 
+    <script src="sortfilter.js"></script>
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
