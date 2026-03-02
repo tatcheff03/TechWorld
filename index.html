@@ -32,6 +32,27 @@
             <p id="categoryDesc"></p>
         </div>
 
+    <div class="filter-container">
+        <div class="filters">
+        <h3>Brand</h3>
+        <div class="brand-checkboxes"></div>
+
+        <h3>Price</h3>
+        <label for="minPrice">Min Price: $</label>
+        <input type="number" id="minPrice" name="minPrice" min="0" max="1000" step="10">
+        <label for="maxPrice">Max Price: $</label>
+        <input type="number" id="maxPrice" name="maxPrice" min="0" max="1000" step="10">
+
+        <h3>Minumum Rating</h3>
+        <label for="minRating"></label>
+        <select id="minRating" name="minRating">
+            <option value="3">3 stars</option>
+            <option value="4">4 stars</option>
+            <option value="5">5 stars</option>
+        </select>
+        </div>
+    </div>
+
         <div class="sort-container">
             <label for="sortSelect">Sort by:</label>
             <select id="sortSelect">

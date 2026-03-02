@@ -1,4 +1,4 @@
-// sorting
+// sort
 function sortProd(products, option) {
     const sorted = [...products];
 
@@ -29,4 +29,22 @@ function sortProd(products, option) {
     }
 
     return sorted;
+}
+
+// filter
+function filterProd (products,filtered){
+    return products.filter(product => {
+        // check if selected brand matches 
+        const brandMatch = !filtered.brands.length || filtered.brands.includes(product.brand.trim().toLowerCase());
+        
+        //check if product withing price range
+        const finalPrice = product.discountPrice ?? product.price;
+        const priceMatch = finalPrice >= filtered.minPrice && finalPrice <= filtered.maxPrice;
+
+        // check if it meets the selected rating
+        const ratingMatch = product.rating >= filtered.minRating;
+
+        return brandMatch && priceMatch && ratingMatch;
+    });
+
 }

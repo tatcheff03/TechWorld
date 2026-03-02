@@ -16,22 +16,29 @@ const headsetModels = [
   { name:"JBL Wireless Headset", image:"https://images.unsplash.com/photo-1622473776277-c57c423daf63?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
 ];
 
+const categoryBrands = {
+  laptops: laptopModels.map(m => m.name.trim()),
+  keyboards: keyboardModels.map(m => m.name.trim()),
+  headsets: headsetModels.map(m => m.name.trim())
+}
+
 let globalId=1;
 // generate 45 products with random data
 function generateProducts(category, models, count = 45) {
   return Array.from({ length: count }, (_, i) => {
-    const price = +(50 + Math.random() * 500).toFixed(2);
+    const price = +(40 + Math.random() * 500).toFixed(2);
     const model = models[Math.floor(Math.random() * models.length)];
     const discountPrice = Math.random() > 0.5 ? +(price *(0.5  + Math.random() * 0.25)).toFixed(2) : null;
     return {
     id: globalId++,
     category: category,
-    name: `${model.name} ${i + 1}`,
+    name: `${model.name.trim()} ${i + 1}`,
+    brand: model.name.trim(),
     description: `High-quality ${model.name} ${category} product `,
     price: price,
     discountPrice: discountPrice,
     image: model.image, 
-    rating: +(Math.random() * 2 + 3).toFixed(1) 
+    rating: [3, 4, 5][Math.floor(Math.random() * 3)] 
     };
   });
 }
