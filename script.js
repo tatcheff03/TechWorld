@@ -58,7 +58,7 @@ document.querySelector('.filters').addEventListener('input', (e) => {
     }
 });
 
-const navLinks = document.querySelectorAll('.category-menu a');
+const navLinks = document.querySelectorAll('#mainNav [data-category]');
 const main= document.getElementById('main');
 
 const products_per_row = 4;
@@ -112,38 +112,49 @@ function renderProducts() {
     counter.textContent = `${Math.min(shownProducts + next_products.length, sortedProducts.length)} out of ${sortedProducts.length} products shown.`;
 
     // loop through and create product cards for each item
-    next_products.forEach(product => {
-        const card = document.createElement('div');
-        card.classList.add('product-card');
+   next_products.forEach(product => {
+  //  column wrapper for responsiveness:
+  // 1 row on phones, 2 small tablets, 3 laptops, 4 large desktops
+  const col = document.createElement('div');
+  col.className = 'col-12 col-sm-6 col-lg-4 col-xxl-3';
 
-        card.innerHTML = `
-        <div class="product-image">
-        <img src="${product.image}" alt="${product.name}" />
-        </div>
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <p>
-            Price: 
-            ${product.discountPrice
-                ? `<span class="original-price">$${product.price.toFixed(2)}</span> 
-                <span class="discounted-price">$${product.discountPrice.toFixed(2)}</span>`
-                : `$${product.price.toFixed(2)}`
-            }
+  col.innerHTML = `
+    <div class="card h-100 shadow-sm product-card">
+      <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
+      <div class="card-body d-flex flex-column text-center">
+        <h3 class="h6 card-title mb-2">${product.name}</h3>
+        <p class="card-text text-secondary small mb-2">${product.description}</p>
+
+        <p class="mb-2">
+          <span class="fw-semibold">Price:</span>
+          ${
+            product.discountPrice
+              ? `<span class="text-secondary text-decoration-line-through me-2">$${product.price.toFixed(2)}</span>
+                 <span class="text-danger fw-bold">$${product.discountPrice.toFixed(2)}</span>`
+              : `<span class="fw-semibold">$${product.price.toFixed(2)}</span>`
+          }
         </p>
-        <p>Rating: ${product.rating} ⭐</p>
-        <button class="add-to-cart">Add to Cart</button>
-        `;
 
-        // add to cart success message
-        card.querySelector('.add-to-cart').addEventListener('click', () => {
-            alert(`${product.name} added to cart!`);
-        });
+        <p class="mb-3 d-flex justify-content-center align-items-center gap-2">
+  <span class="text-warning">
+    ${'★'.repeat(product.rating)}${'☆'.repeat(5 - product.rating)}
+  </span>
+  <span class="badge text-bg-light border text-dark">${product.rating}/5</span>
+</p>
 
-        main.appendChild(card);
+        <button type="button" class="btn btn-primary mt-auto w-100 btn-brand add-to-cart">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  `;
 
+  col.querySelector('.add-to-cart').addEventListener('click', () => {
+    showCartToast(`${product.name} added to cart!`);
+  });
 
-    });
-
+  main.appendChild(col);
+});
     // add the number of newly loaded products to the total shown
     shownProducts += next_products.length;
     // show btn if more products remain
@@ -195,6 +206,15 @@ navLinks.forEach(link => {
 function resetView(){
     main.innerHTML = ''; 
     shownProducts = 0;
+}
+
+function showCartToast(message){
+    const toastEl= document.getElementById('cartToast');
+    const toastBody = document.getElementById('cartToastBody');
+    toastBody.textContent = message;
+
+    const toast = bootstrap.Toast.getOrCreateInstance(toastEl, { delay: 2000 });
+    toast.show();
 }
 
 
